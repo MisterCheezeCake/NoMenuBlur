@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "wtf.cheeze.nomenublur.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+      "ScreenMixin",
+      "YACLScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
