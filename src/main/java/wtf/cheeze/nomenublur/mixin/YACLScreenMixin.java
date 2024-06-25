@@ -14,7 +14,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with NotEnoughUpdates. If not, see <https://www.gnu.org/licenses/>.
+ * along with NoMenuBlur. If not, see <https://www.gnu.org/licenses/>.
  */
 package wtf.cheeze.nomenublur.mixin;
 
