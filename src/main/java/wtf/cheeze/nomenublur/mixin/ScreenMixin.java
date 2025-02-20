@@ -18,6 +18,7 @@
  */
 package wtf.cheeze.nomenublur.mixin;
 
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -41,29 +42,20 @@ public abstract class ScreenMixin {
 	@Shadow
 	public int height;
 
-	@Shadow
-	protected abstract void renderDarkening(DrawContext context);
+	@WrapWithCondition(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur()V"))
+	private boolean nmb$shouldApplyBlur(Screen instance) {
+		if (!NoMenuBlur.config.configHandler.enabled) return true;
+		else return !NoMenuBlur.config.configHandler.disableBlur;
+	}
 
-	@Shadow
-	protected abstract void applyBlur(float delta);
-
-	@Inject(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur(F)V", ordinal = 0), cancellable = true)
-	protected void onRenderBackground(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo info) {
-		if (NoMenuBlur.config.configHandler.enabled == false) return;
-		if (this.client.world == null) {
-			this.renderDarkening(context);
-			info.cancel();
-			return;
-		}
-		if (NoMenuBlur.config.configHandler.disableBlur == false) {
-			this.applyBlur(delta);
-		}
-
-		if (NoMenuBlur.config.configHandler.defaultBackground == true) {
-			this.renderDarkening(context);
-		} else {
+	@WrapWithCondition(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;renderDarkening(Lnet/minecraft/client/gui/DrawContext;)V"))
+	private boolean nmb$shouldRenderDarkening(Screen instance, DrawContext context) {
+		if (!NoMenuBlur.config.configHandler.enabled) return true;
+		if (this.client == null || this.client.world == null) return true;
+		else if (NoMenuBlur.config.configHandler.defaultBackground) return true;
+		else {
 			context.fillGradient(0, 0, this.width, this.height, NoMenuBlur.colorToRGBAInt(NoMenuBlur.config.configHandler.color1), NoMenuBlur.colorToRGBAInt(NoMenuBlur.config.configHandler.color2));
+			return false;
 		}
-		info.cancel();
 	}
 }

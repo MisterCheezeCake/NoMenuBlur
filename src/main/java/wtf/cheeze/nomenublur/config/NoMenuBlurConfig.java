@@ -18,11 +18,7 @@
  */
 package wtf.cheeze.nomenublur.config;
 
-import dev.isxander.yacl3.api.ButtonOption;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.api.ConfigCategory;
+import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
@@ -46,28 +42,26 @@ public class NoMenuBlurConfig {
 				Option<Color> color1 = Option.<Color>createBuilder()
 					.name(Text.literal("Background Color 1"))
 					.description(OptionDescription.of(Text.literal("The first color of the background gradient")))
-					.binding(
+					.stateManager(StateManager.createInstant(
 						ConfigImp.DEFAULT_COLOR_1,
 						() -> configHandler.color1,
 						color -> {
 							configHandler.color1 = color;
-						}
+						})
 					)
-					.instant(true)
 					.available(configHandler.enabled && !configHandler.defaultBackground)
 					.controller(opt -> ColorControllerBuilder.create(opt).allowAlpha(true))
 					.build();
 				Option<Color> color2 = Option.<Color>createBuilder()
 					.name(Text.literal("Background Color 2"))
 					.description(OptionDescription.of(Text.literal("The second color of the background gradient")))
-					.binding(
+					.stateManager(StateManager.createInstant(
 						ConfigImp.DEFAULT_COLOR_2,
 						() -> configHandler.color2,
 						color -> {
 							configHandler.color2 = color;
 						}
-					)
-					.instant(true)
+					))
 					.available(configHandler.enabled && !configHandler.defaultBackground)
 					.controller(opt -> ColorControllerBuilder.create(opt).allowAlpha(true))
 					.build();
@@ -84,14 +78,13 @@ public class NoMenuBlurConfig {
 				Option<Boolean> disableBlur = Option.<Boolean>createBuilder()
 					.name(Text.literal("Disable Blur"))
 					.description(OptionDescription.of(Text.literal("Whether or not the mod should disable the blur effect.")))
-					.binding(
+					.stateManager(StateManager.createInstant(
 						true,
 						() -> configHandler.disableBlur,
 						b -> {
 							configHandler.disableBlur = b;
 						}
-					)
-					.instant(true)
+					))
 					.available(configHandler.enabled)
 					.controller(TickBoxControllerBuilder::create)
 					.build();
@@ -99,7 +92,7 @@ public class NoMenuBlurConfig {
 				Option<Boolean> defaultBackground = Option.<Boolean>createBuilder()
 					.name(Text.literal("Use Default Background"))
 					.description(OptionDescription.of(Text.literal("Whether or not to render the default background or the customized one. This option does not care if blur is on or off.")))
-					.binding(
+					.stateManager(StateManager.createInstant(
 						false,
 						() -> configHandler.defaultBackground,
 						b -> {
@@ -114,8 +107,7 @@ public class NoMenuBlurConfig {
 								sync.setAvailable(true);
 							}
 						}
-					)
-					.instant(true)
+					))
 					.available(configHandler.enabled)
 					.controller(TickBoxControllerBuilder::create)
 					.build();
@@ -123,7 +115,7 @@ public class NoMenuBlurConfig {
 				Option<Boolean> toggle = Option.<Boolean>createBuilder()
 					.name(Text.literal("Mod Toggle"))
 					.description(OptionDescription.of(Text.literal("Whether or not the mod should do anything. If this option is disabled, the mod won't apply any changes to the game's rendering.")))
-					.binding(
+					.stateManager(StateManager.createInstant(
 						true,
 						() -> configHandler.enabled,
 						enabled -> {
@@ -142,14 +134,13 @@ public class NoMenuBlurConfig {
 								if (!configHandler.defaultBackground) sync.setAvailable(true);
 							}
 						}
-					)
-					.instant(true)
+					))
 					.controller(opt -> BooleanControllerBuilder.create(opt)
-						.valueFormatter(val -> val ? Text.literal("Enabled") : Text.literal("Disabled"))
+						.formatValue(b -> b ? Text.literal("Enabled") : Text.literal("Disabled"))
 						.coloured(true))
 					.build();
 
-				Screen yaclScreen = YetAnotherConfigLib.createBuilder()
+				return YetAnotherConfigLib.createBuilder()
 					.title(Text.literal("NoMenuBlur Config"))
 					.category(
 						ConfigCategory.createBuilder()
@@ -165,7 +156,5 @@ public class NoMenuBlurConfig {
 					.save(this::save)
 					.build()
 					.generateScreen(parent);
-
-				return yaclScreen;
 			}
 }
