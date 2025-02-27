@@ -31,7 +31,6 @@ import wtf.cheeze.nomenublur.NoMenuBlur;
 // TODO: Remove this if YACL is ever fixed... or remove YACL
 @Mixin(YACLScreen.class)
 public abstract class YACLScreenMixin {
-
 	@Inject(method = "close", at = @At("HEAD"))
 	public void onCloseYACLScreen(CallbackInfo info) {
 		if (MinecraftClient.getInstance().currentScreen.getTitle().toString().contains("NoMenuBlur")) {
