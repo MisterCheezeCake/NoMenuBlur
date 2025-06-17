@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "nomenublur",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"name": "NoMenuBlur",
 	"description": "Allows you to disable the blur effect on pause menu, and lets you customize that menu's background.",
 	"authors": [
@@ -10,8 +10,7 @@
 	"contact": {
 		"homepage": "https://modrinth.com/mod/nomenublur",
 		"sources": "https://github.com/MisterCheezeCake/NoMenuBlur",
-        "issues": "https://github.com/MisterCheezeCake/NoMenuBlur/issues",
-        "discord": "https://discord.gg/jgh5SRqAvd"
+        "issues": "https://github.com/MisterCheezeCake/NoMenuBlur/issues"
 	},
 	"license": "LGPL-3.0-or-later",
 	"icon": "assets/nomenublur/icon.png",
@@ -30,7 +29,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",
-		"minecraft": ">=1.21.4",
+		"minecraft": ">=1.21.6",
 		"java": ">=21",
 		"fabric-api": "*",
         "yet_another_config_lib_v3": "*"
