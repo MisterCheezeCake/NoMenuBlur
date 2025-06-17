@@ -31,7 +31,7 @@ import java.awt.Color;
 
 public class NoMenuBlurConfig {
 
-			public ConfigImp configHandler = new ConfigImp();
+			public ConfigImpl configHandler = new ConfigImpl();
 			public void save() {
 				NoMenuBlur.LOGGER.info("NoMenuBlur: Saving Config");
 				this.configHandler.save();
@@ -43,7 +43,7 @@ public class NoMenuBlurConfig {
 					.name(Text.literal("Background Color 1"))
 					.description(OptionDescription.of(Text.literal("The first color of the background gradient")))
 					.stateManager(StateManager.createInstant(
-						ConfigImp.DEFAULT_COLOR_1,
+						ConfigImpl.DEFAULT_COLOR_1,
 						() -> configHandler.color1,
 						color -> {
 							configHandler.color1 = color;
@@ -56,7 +56,7 @@ public class NoMenuBlurConfig {
 					.name(Text.literal("Background Color 2"))
 					.description(OptionDescription.of(Text.literal("The second color of the background gradient")))
 					.stateManager(StateManager.createInstant(
-						ConfigImp.DEFAULT_COLOR_2,
+						ConfigImpl.DEFAULT_COLOR_2,
 						() -> configHandler.color2,
 						color -> {
 							configHandler.color2 = color;

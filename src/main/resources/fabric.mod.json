@@ -40,6 +40,12 @@
 	},
     "conflicts": {
       "nmblite": "*"
-    }
-
+    },
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/YH3hw926hz"
+			}
+		}
+	}
 }

@@ -28,7 +28,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ConfigImp {
+public class ConfigImpl {
 	public static final Color DEFAULT_COLOR_1 = new Color(16, 16, 16, 192);
 	public static final Color DEFAULT_COLOR_2 = new Color(16, 16, 16, 208);
   private static final Gson gson = new Gson();

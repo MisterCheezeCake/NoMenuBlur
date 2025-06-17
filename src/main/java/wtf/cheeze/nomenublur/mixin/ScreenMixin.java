@@ -42,8 +42,8 @@ public abstract class ScreenMixin {
 	@Shadow
 	public int height;
 
-	@WrapWithCondition(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur()V"))
-	private boolean nmb$shouldApplyBlur(Screen instance) {
+	@WrapWithCondition(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;applyBlur(Lnet/minecraft/client/gui/DrawContext;)V"))
+	private boolean nmb$shouldApplyBlur(Screen instance, DrawContext context) {
 		if (!NoMenuBlur.config.configHandler.enabled) return true;
 		else return !NoMenuBlur.config.configHandler.disableBlur;
 	}

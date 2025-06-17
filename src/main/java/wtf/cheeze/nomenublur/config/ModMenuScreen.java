@@ -26,5 +26,5 @@ public final class ModMenuScreen implements ModMenuApi {
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
 		return NoMenuBlur.config::createConfigScreen;
-		}
+	}
 }

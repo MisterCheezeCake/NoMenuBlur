@@ -28,7 +28,7 @@ public class SerializableConfig {
 	public boolean disableBlur;
 	public boolean defaultBackground;
 
-	public SerializableConfig(ConfigImp config) {
+	public SerializableConfig(ConfigImpl config) {
 		this.color1 = NoMenuBlur.colorToRGBAInt(config.color1);
 		this.color2 = NoMenuBlur.colorToRGBAInt(config.color2);
 		this.enabled = config.enabled;

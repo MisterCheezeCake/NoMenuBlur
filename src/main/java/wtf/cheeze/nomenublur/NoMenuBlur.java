@@ -31,7 +31,7 @@ import wtf.cheeze.nomenublur.config.NoMenuBlurConfig;
 
 public class NoMenuBlur implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("nomenublur");
-		public static NoMenuBlurConfig config = new NoMenuBlurConfig();
+	public static NoMenuBlurConfig config = new NoMenuBlurConfig();
 
 	public static int colorToRGBAInt(java.awt.Color color) {
 		int alpha = color.getAlpha();
@@ -44,7 +44,7 @@ public class NoMenuBlur implements ModInitializer {
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("nomenublur")
 			.executes(context -> {
 					MinecraftClient mc = context.getSource().getClient();
-					Screen screen = this.config.createConfigScreen(null);
+					Screen screen = config.createConfigScreen(null);
 					mc.send(() -> mc.setScreen(screen));
 					return 1;
 			 }

@@ -37,7 +37,6 @@ public abstract class YACLScreenMixin {
 		if (MinecraftClient.getInstance().currentScreen.getTitle().toString().contains("NoMenuBlur")) {
 			NoMenuBlur.config.save();
 		};
-
 	}
 }
 
